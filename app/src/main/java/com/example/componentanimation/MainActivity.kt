@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.componentanimation.ui.theme.ComponentAnimationTheme
+import com.example.componentanimation.view.component.textTransition
 import com.example.componentanimation.view.composableScreen.First
 
 class MainActivity : ComponentActivity() {
@@ -19,7 +20,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ComponentAnimationTheme {
                 // A surface container using the 'background' color from the theme
-                First()
+                textTransition()
             }
         }
     }
