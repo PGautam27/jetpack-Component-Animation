@@ -28,6 +28,8 @@ fun textTransition() {
         MySliderDemo()
         Spacer(modifier = Modifier.padding(10.dp))
         CheckBoxDemo()
+        Spacer(modifier = Modifier.padding(10.dp))
+        ModalDrawerSample()
     }
 }
 @Composable
