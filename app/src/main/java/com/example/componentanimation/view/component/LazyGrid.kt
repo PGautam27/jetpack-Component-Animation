@@ -4,6 +4,8 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -21,6 +23,11 @@ fun screen() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Column(modifier = Modifier
+            .fillMaxWidth()
+            .height(200.dp), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(text = "HI HOW ARE YOU")
+        }
         LazyVerticalGridDemo()
     }
 }
@@ -41,12 +48,14 @@ fun LazyVerticalGridDemo(){
         ),
         content = {
             items(list.size) { index ->
-                Card(
-                    backgroundColor = Color.Red,
+                Button(
+                    onClick = {},
                     modifier = Modifier
                         .padding(4.dp)
                         .fillMaxWidth(),
-                    elevation = 8.dp,
+                    colors = ButtonDefaults.buttonColors(
+                        backgroundColor = Color.Red
+                    )
                 ) {
                     Text(
                         text = list[index],
