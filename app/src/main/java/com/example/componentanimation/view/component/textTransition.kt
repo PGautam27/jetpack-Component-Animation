@@ -4,13 +4,13 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.launch
 
 @Composable
 fun textTransition() {
@@ -24,6 +24,10 @@ fun textTransition() {
         SwitchDemo()
         Spacer(modifier = Modifier.padding(10.dp))
         AlertDialogSample()
+        Spacer(modifier = Modifier.padding(10.dp))
+        MySliderDemo()
+        Spacer(modifier = Modifier.padding(10.dp))
+        CheckBoxDemo()
     }
 }
 @Composable
@@ -112,4 +116,57 @@ fun AlertDialogSample() {
         }
 
     }
+}
+
+@Composable
+fun MySliderDemo() {
+    var sliderPosition by remember { mutableStateOf(1f) }
+    var slideValue = ((sliderPosition * 10).toInt())
+    Text(text = slideValue.toString())
+    Slider(value = sliderPosition, onValueChange = { sliderPosition = it })
+}
+
+@Composable
+fun CheckBoxDemo() {
+    val checkedState = remember { mutableStateOf(true) }
+    Checkbox(
+        checked = checkedState.value,
+        onCheckedChange = { checkedState.value = it }
+    )
+}
+
+@Composable
+fun ModalDrawerSample() {
+    val drawerState = rememberDrawerState(DrawerValue.Closed)
+    val scope = rememberCoroutineScope()
+
+    ModalDrawer(
+        drawerState = drawerState,
+        drawerContent = {
+            Column {
+                Text("Text in Drawer")
+                Button(onClick = {
+                    scope.launch {
+                        drawerState.close()
+                    }
+                }) {
+                    Text("Close Drawer")
+                }
+            }
+        },
+        content = {
+            Column {
+                Text("Text in Bodycontext")
+                Button(onClick = {
+
+                    scope.launch {
+                        drawerState.open()
+                    }
+
+                }) {
+                    Text("Click to open")
+                }
+            }
+        }
+    )
 }
