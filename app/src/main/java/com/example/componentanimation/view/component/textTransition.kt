@@ -2,6 +2,7 @@ package com.example.componentanimation.view.component
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -27,9 +28,41 @@ fun textTransition() {
         Spacer(modifier = Modifier.padding(10.dp))
         MySliderDemo()
         Spacer(modifier = Modifier.padding(10.dp))
+        RadioButtonSample()
+        Spacer(modifier = Modifier.padding(10.dp))
         CheckBoxDemo()
         Spacer(modifier = Modifier.padding(10.dp))
         ModalDrawerSample()
+    }
+}
+@Composable
+fun RadioButtonSample() {
+    val radioOptions = listOf("A", "B", "C")
+    val (selectedOption, onOptionSelected) = remember { mutableStateOf(radioOptions[1] ) }
+    Column {
+        radioOptions.forEach { text ->
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .selectable(
+                        selected = (text == selectedOption),
+                        onClick = {
+                            onOptionSelected(text)
+                        }
+                    )
+                    .padding(horizontal = 16.dp)
+            ) {
+                RadioButton(
+                    selected = (text == selectedOption),
+                    onClick = { onOptionSelected(text) }
+                )
+                Text(
+                    text = text,
+                    style = MaterialTheme.typography.body1.merge(),
+                    modifier = Modifier.padding(start = 16.dp)
+                )
+            }
+        }
     }
 }
 @Composable
